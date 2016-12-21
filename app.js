@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var routes = require('./app/routes/');
 //var users = require('./routes/users');
@@ -23,6 +24,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+//CrossOrigin
+var originWhiteList = [
+  ''
+];
+var whitelist = ['http://localhost:4200', 'http://example2.com'];
+var corsOptions = {
+  origin: function(origin, callback){
+    var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(originIsWhitelisted ? null : 'Bad Request', originIsWhitelisted);
+  }
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
