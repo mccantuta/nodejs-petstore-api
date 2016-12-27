@@ -23,13 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-
 //CrossOrigin
-var originWhiteList = [
-  ''
-];
-var whitelist = ['http://localhost:4200', 'http://example2.com'];
+var whitelist = ['http://localhost:4200'];
 var corsOptions = {
   origin: function(origin, callback){
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
@@ -39,6 +34,8 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
+//Add routes
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
