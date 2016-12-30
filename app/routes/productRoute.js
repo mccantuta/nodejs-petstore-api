@@ -9,11 +9,11 @@ routes.get('/', (req, res, next) => {
     }
     productService.getProduct(queryParameters)
       .then( (data) => {
-          console.log('ESTO ES ', data);
           res.json(data);
           })
       .catch( (error) => {
           console.log('error ', error);
+          
       });
     ;
 });
