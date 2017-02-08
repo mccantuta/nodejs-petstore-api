@@ -30,9 +30,11 @@ routes.use(function (req, res, next) {
             message: 'No token provided'
         });
     }
-})
+});
 
 routes.use('/categories', categoryRoute);
+
+//Aca agrego un comentario
 routes.use('/products', productRoute);
 
 module.exports = routes;
